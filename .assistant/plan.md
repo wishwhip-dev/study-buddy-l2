@@ -1,0 +1,20 @@
+# Plan
+
+Goal: I paste my class notes and press Make quiz; an assistant turns them into five multiple-choice questions I can answer one by one with a score at the end. Show when it is thinking and when it is not available. Keep my past quizzes in a list that survives a reload.
+
+1. The home page shows a form with a labelled large textarea for pasting class notes and an enabled 'Make quiz' button (at least 32px tall) that starts the flow with no sign-in, URL parameter or prior navigation.
+2. Beside the notes input the page shows the fixed text 'Text you enter is sent to an AI model provider', and pressing 'Make quiz' with an empty textarea shows a validation message instead of calling the model.
+3. While the model is working, the page shows a visible 'Thinking…' state with the 'Make quiz' button disabled so a second press does nothing; when the call fails or is capped, the page shows a plain-text message saying the assistant is unavailable or over its limit, with a 'Try again' button, never a spinner that never ends.
+4. The model is asked through lib/ai.ts for exactly five multiple-choice questions in a JSON shape (question text, four options, the correct index); when the answer arrives, the page replaces the thinking state with question 1 of 5 shown as a card with the question and four labelled option buttons, and the notes stay visible above so they can be checked.
+5. If the model's reply is unparseable or holds fewer than five complete questions, the page shows a message that it could not make five questions from these notes and suggests longer notes, with a 'Try again' button; no quiz card, partial question or past-quiz entry appears in that case.
+6. The quiz runs one question at a time: clicking an option marks it selected and enables a Next button, and answering all five moves to a results screen showing the final score as a large readout like 'You scored 4 of 5' with a table below it listing each question, the answer chosen, and whether it was right or wrong.
+7. From the results screen a 'Make another quiz' button clears the notes textarea and returns to the home form ready for a new quiz.
+8. The finished quiz is saved through the app's own Dexie queries (lib/data) with its title taken from the notes' first line, the five questions, the chosen answers and the score, and after reloading the page the completed quiz still appears in the past-quizzes list with its score and date.
+9. Reloading the page while a quiz is in progress returns to the home page with the unfinished quiz absent from the past-quizzes list; only completed quizzes are saved.
+10. The home page shows a list of past quizzes (title, date, score out of 5) that a visitor can click to reopen a read-only review of that quiz's questions, options, chosen answers and correct answers; each list item has a 'Delete quiz' button whose label says the destructive action, and deleting removes it from the list, a deletion that still holds after a reload.
+11. Answering works from the keyboard: option buttons are real buttons reachable by Tab and pressable with Enter or Space, and number keys 1–4 select the numbered option while Enter advances to the next question.
+12. Every screen of the flow — home with notes form, thinking state, question card, results, past-quiz review — lays out in a single column at phone width with all controls at least 32px tall and nothing overflowing the viewport.
+13. The app's name and description in app/identity.ts are rewritten to describe the quiz maker, so the browser tab title matches the product.
+14. A 'Load sample notes' link fills the textarea with a few paragraphs of real study content — roughly 300 words on one topic with at least ten distinct facts — so the whole flow can be tried without pasting anything.
+
+These are the outcomes this task is judged against.

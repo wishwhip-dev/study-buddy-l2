@@ -20,7 +20,7 @@ import {
 } from "@/components/ui/dialog";
 import { Skeleton } from "@/components/ui/skeleton";
 import type { Quiz } from "@/lib/db";
-import { deleteQuiz } from "@/lib/data/quizzes";
+import { deleteQuiz, listQuizzes } from "@/lib/data/quizzes";
 import { database } from "@/lib/db";
 import { useStoredQuery } from "@/lib/storage/react";
 
@@ -30,7 +30,7 @@ type QuizListProps = {
 
 /** The quizzes already played, newest first, each one openable for review and deletable. */
 export function QuizList({ onOpen }: QuizListProps) {
-  const { data: quizzes, isLoading } = useStoredQuery(database, listQuizzesLive, []);
+  const { data: quizzes, isLoading } = useStoredQuery(database, listQuizzes, []);
   const [pendingDelete, setPendingDelete] = useState<Quiz | null>(null);
   const [deleting, setDeleting] = useState(false);
 

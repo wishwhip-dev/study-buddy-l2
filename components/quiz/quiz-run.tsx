@@ -29,20 +29,7 @@ export function QuizRun({ questions, notes, title, onDone }: QuizRunProps) {
   const question = questions[index];
   const isLast = index === questions.length - 1;
 
-  const choose = useCallback((option: number) => setSelected(option), []);
-
-  const advance = useCallback(() => {
-    if (selected === null) return;
-    if (isLast) {
-      onDone(questions.map((_, i) => (i === index ? selected : -1)));
-      // `selected` for the other questions is tracked in the ref below, not here.
-    } else {
-      setIndex(index + 1);
-      setSelected(null);
-    }
-  }, [index, isLast, onDone, questions, selected]);
-
-  // The answers so far live in a ref-free way: keep them in state alongside the index.
+  // The answers so far, one entry per question; -1 means not yet answered.
   const [answers, setAnswers] = useState<number[]>(() => questions.map(() => -1));
 
   const record = useCallback(

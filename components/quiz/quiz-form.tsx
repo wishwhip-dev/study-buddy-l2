@@ -45,7 +45,7 @@ export function QuizForm({
           type="button"
           variant="link"
           size="sm"
-          className="h-auto p-0"
+          className="min-h-8 px-2"
           onClick={onSample}
         >
           Load sample notes

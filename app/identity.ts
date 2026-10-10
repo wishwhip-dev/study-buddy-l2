@@ -6,7 +6,7 @@
  */
 export const identity = {
   name: "Study buddy",
-  description: "Study buddy: a small web app.",
+  description: "Turn class notes into a five-question quiz, play it, and keep your past scores.",
   accent: "#047857",
   initial: "S",
 } as const;

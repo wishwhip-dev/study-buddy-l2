@@ -13,7 +13,7 @@ import { QuizResults } from "@/components/quiz/quiz-results";
 import { QuizReview } from "@/components/quiz/quiz-review";
 import { QuizRun } from "@/components/quiz/quiz-run";
 import { askModel } from "@/lib/ai";
-import { newId, type Quiz, type QuizQuestion } from "@/lib/db";
+import { database, newId, type Quiz, type QuizQuestion } from "@/lib/db";
 import { saveQuiz } from "@/lib/data/quizzes";
 import { SAMPLE_NOTES } from "@/lib/sample-notes";
 import { useStorageStatus } from "@/lib/storage/react";

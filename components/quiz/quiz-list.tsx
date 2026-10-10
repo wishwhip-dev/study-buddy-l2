@@ -122,10 +122,6 @@ export function QuizList({ onOpen }: QuizListProps) {
   );
 }
 
-function listQuizzesLive() {
-  return import("@/lib/data/quizzes").then((module) => module.listQuizzes());
-}
-
 function formatDate(timestamp: number): string {
   return new Date(timestamp).toLocaleDateString(undefined, {
     day: "numeric",

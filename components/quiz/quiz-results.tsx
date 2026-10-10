@@ -70,10 +70,7 @@ export function QuizResults({ title, questions, answers, score, onMakeAnother }:
                       {chosen >= 0 ? question.options[chosen] : "Not answered"}
                     </TableCell>
                     <TableCell className="align-top">
-                      <Badge
-                        variant={correct ? "default" : "destructive"}
-                        className={cn("text-xs", !correct && "bg-destructive")}
-                      >
+                      <Badge variant={correct ? "default" : "destructive"} className="text-xs">
                         {correct ? "Right" : "Wrong"}
                       </Badge>
                     </TableCell>
